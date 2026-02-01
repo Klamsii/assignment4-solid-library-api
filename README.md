@@ -1,199 +1,148 @@
-Library Management System (Java, JDBC)
-Project Overview
+# Library Management System (Java, JDBC)
+
+## Project Overview
 
 This project is a console-based Library Management System written in Java using JDBC and PostgreSQL.
-The application follows a layered architecture and demonstrates core backend concepts such as:
+The application follows a layered architecture and demonstrates backend development concepts such as
+CRUD operations, authentication, authorization, and clean code practices.
 
-CRUD operations
+The project was developed for educational purposes.
 
-DTO usage
+## Architecture
 
-Authentication and Authorization
+The application uses a layered architecture:
 
-Role-Based Access Control (RBAC)
+Main  
+Controller  
+Service  
+Repository  
+PostgreSQL Database  
 
-Java Streams and Lambda expressions
+### Layer responsibilities
 
-Reflection (RTTI)
+Controller  
+Handles user interaction and delegates requests to services.
 
-SOLID principles
+Service  
+Contains business logic, performs validation, and implements role-based access control.
 
-Architecture
+Repository  
+Handles database operations using JDBC and executes SQL queries.
 
-The project is structured using a clean layered architecture:
+DTO  
+Transfers data between layers and is used for formatted output.
 
-Main
- └── Controller
-     └── Service
-         └── Repository
-             └── Database (PostgreSQL)
+Utils  
+Shared utilities such as database connection and reflection.
 
-Layers description
+## Project Structure
 
-Controller – handles user interaction and delegates logic
+src/  
+controller/  
+service/  
+interfaces/  
+impl/  
+repository/  
+interfaces/  
+impl/  
+model/  
+dto/  
+exception/  
+interfaces/  
+utils/  
+Main.java  
 
-Service – contains business logic and validation
+## Database (PostgreSQL)
 
-Repository – handles database operations using JDBC
+### Tables
 
-DTO – used for data transfer and presentation
-
-Utils – shared utilities (database connection, reflection)
-
-Project Structure
-src/
-├── controller/
-├── service/
-│   ├── interfaces/
-│   └── impl/
-├── repository/
-│   ├── interfaces/
-│   └── impl/
-├── model/
-├── dto/
-├── exception/
-├── interfaces/
-├── utils/
-└── Main.java
-
-Database (PostgreSQL)
-Tables
-authors
-id SERIAL PRIMARY KEY
+authors  
+id SERIAL PRIMARY KEY  
 name VARCHAR(100)
 
-books
-id SERIAL PRIMARY KEY
-name VARCHAR(100)
-format VARCHAR(20)
+books  
+id SERIAL PRIMARY KEY  
+name VARCHAR(100)  
+format VARCHAR(20)  
 author_id INT REFERENCES authors(id)
 
-users
-id SERIAL PRIMARY KEY
-username VARCHAR(50) UNIQUE
-password VARCHAR(255)
+users  
+id SERIAL PRIMARY KEY  
+username VARCHAR(50) UNIQUE  
+password VARCHAR(255)  
 role VARCHAR(20) CHECK (role IN ('ADMIN', 'USER'))
 
-Authentication and Roles
+## Authentication and Roles
 
-The application supports login and registration.
+The application supports user login and registration.
 
-Roles
-
-USER
-
-View books
-
-Filter and sort books
-
+USER role  
+View all books  
+Show book by ID  
+Filter books by format  
+Sort books  
 View statistics
 
-ADMIN
+ADMIN role  
+All USER permissions  
+Add books  
+Remove books  
+View all users  
+Delete users  
+Promote users to ADMIN  
+Demote users to USER
 
-All USER permissions
+Role-based access is enforced in the main menu.
 
-Add books
+## Features
 
-Remove books
-
-View all users
-
-Delete users
-
-Promote users to ADMIN
-
-Demote ADMIN to USER
-
-Role-based access is enforced in the Main menu logic.
-
-Features
-Books
-
-Show all books in a formatted table
-
-Show book by ID
-
-Add book (ADMIN only)
-
-Remove book (ADMIN only)
-
-Filter by format (EBOOK / PRINTED)
-
-Sort by book name
-
+Books  
+Show all books in a formatted table  
+Show book by ID  
+Add book (ADMIN only)  
+Remove book (ADMIN only)  
+Filter by EBOOK or PRINTED  
+Sort by book name  
 Sort by author name
 
-Users (ADMIN)
-
-View all users
-
-Delete user
-
-Promote user to ADMIN
-
+Users (ADMIN)  
+View all users  
+Delete user  
+Promote user to ADMIN  
 Demote user to USER
 
-Statistics
-
+Statistics  
 Count how many books each author has
 
-DTO Usage
+## DTO Usage
 
-The BookWithAuthor DTO is used to display joined data from multiple tables
-without polluting domain models.
+The BookWithAuthor DTO is used to display joined data from books and authors tables.
+This avoids polluting domain models and keeps presentation logic clean.
 
-This ensures a clear separation of concerns and clean presentation logic.
+## Reflection (RTTI)
 
-Technologies Used
+Reflection is used to inspect class structure at runtime.
+This demonstrates runtime type information and satisfies the reflection requirement.
 
-Java
-
-JDBC
-
-PostgreSQL
-
-Java Streams and Lambda expressions
-
-Reflection (RTTI)
-
-Reflection (RTTI)
-
-Reflection is used to inspect class structure at runtime and demonstrate
-runtime type information and class metadata inspection.
-
-This satisfies the reflection requirement of the assignment.
-
-Security Notes
+## Security Notes
 
 Passwords are stored in plain text for educational purposes only.
-In a real-world application, password hashing should be applied.
+In real applications, passwords should be hashed.
 
-How to Run
+## How to Run
 
-Create a PostgreSQL database
+Create a PostgreSQL database.  
+Execute SQL scripts to create tables.  
+Configure database credentials in DatabaseConnection.  
+Run Main.java.  
+Login or register and use the menu.
 
-Execute SQL scripts to create the tables
+## Educational Purpose
 
-Configure database credentials in DatabaseConnection
+This project demonstrates Java backend architecture, JDBC database interaction,
+SOLID principles, clean code practices, and role-based access control.
 
-Run Main.java
+## Conclusion
 
-Login or register and use the menu
-
-Educational Purpose
-
-This project was created for educational purposes to demonstrate:
-
-Backend architecture
-
-Database interaction using JDBC
-
-Clean code practices
-
-Object-oriented design principles
-
-Conclusion
-
-This project is a fully functional backend-style console application
-that goes beyond minimal requirements and demonstrates real-world concepts
-used in Java backend development.
+This is a fully functional console-based backend-style application that goes beyond minimal requirements
+and demonstrates real-world Java backend development concepts.
